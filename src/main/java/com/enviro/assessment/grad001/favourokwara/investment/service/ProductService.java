@@ -3,8 +3,6 @@ package com.enviro.assessment.grad001.favourokwara.investment.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
-
 import org.springframework.stereotype.Service;
 
 import com.enviro.assessment.grad001.favourokwara.investment.dto.WithdrawalNoticeDTO;
@@ -42,13 +40,16 @@ public class ProductService {
         return investor.getProducts();
     }
 
-    public WithdrawalNotice createWithdrawalNotice(WithdrawalNoticeDTO withdrawalDTO) {
-        Product product = productRepository
-            .findById(withdrawalDTO.getProductId())
+    public WithdrawalNotice createWithdrawalNotice(Long inevstorId, WithdrawalNoticeDTO withdrawalDTO) {
+
+        Product product = getInvestorProducts(inevstorId)
+            .stream()
+            .filter(prod -> prod.getId().equals(withdrawalDTO.getProductId()))
+            .findFirst()
             .orElseThrow(() -> new RuntimeException(new RuntimeException(String.format("%s with the %s of %s was not found","Product", "id", String.valueOf(1L)))));
-        
+    
         if ((product.getProductType().equals(ProductType.RETIREMENT) &&
-              product.getInvestor().calculateAge() < 65)) {
+            product.getInvestor().calculateAge() < 65)) {
             throw new RuntimeException("Investor should be older than 65");
         }
 

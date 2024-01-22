@@ -2,12 +2,12 @@ package com.enviro.assessment.grad001.favourokwara.investment.dto;
 
 import java.time.LocalDateTime;
 
+import com.enviro.assessment.grad001.favourokwara.investment.model.WithdrawalNotice;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@AllArgsConstructor
 @Data
 public class WithdrawalNoticeDTO {
 
@@ -27,4 +27,8 @@ public class WithdrawalNoticeDTO {
 
     @NotNull(message = "WITHDRAWAL DATE is mandatory.")
     private LocalDateTime withdrawalDate;
+
+    public WithdrawalNotice toWithdrawalNotice() {
+        return new WithdrawalNotice(amount, bankName, accountNumber, withdrawalDate);
+    }
 }

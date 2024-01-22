@@ -44,7 +44,7 @@ public class ProductService {
 
     public WithdrawalNotice createWithdrawalNotice(WithdrawalNoticeDTO withdrawalDTO) {
         Product product = productRepository
-            .findById(1L)
+            .findById(withdrawalDTO.getProductId())
             .orElseThrow(() -> new RuntimeException(new RuntimeException(String.format("%s with the %s of %s was not found","Product", "id", String.valueOf(1L)))));
         
         if ((product.getProductType().equals(ProductType.RETIREMENT) &&
@@ -56,12 +56,7 @@ public class ProductService {
             throw new RuntimeException("Amount can't be greater than balance");
         }
         
-        WithdrawalNotice createdNotice = new WithdrawalNotice(
-            withdrawalDTO.getAmount(),
-            withdrawalDTO.getBankName(),
-            withdrawalDTO.getAccountNumber(),
-            withdrawalDTO.getWithdrawalDate()
-        );
+        WithdrawalNotice createdNotice = withdrawalDTO.toWithdrawalNotice();
         createdNotice.setProduct(product);
         product.getWithdrawalNotices().add(createdNotice);
         

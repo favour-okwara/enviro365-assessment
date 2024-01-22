@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.enviro.assessment.grad001.favourokwara.investment.dto.WithdrawalNoticeDTO;
+import com.enviro.assessment.grad001.favourokwara.investment.exception.ApplicationException;
+import com.enviro.assessment.grad001.favourokwara.investment.exception.Errors;
 import com.enviro.assessment.grad001.favourokwara.investment.model.Investor;
 import com.enviro.assessment.grad001.favourokwara.investment.model.Product;
 import com.enviro.assessment.grad001.favourokwara.investment.model.ProductType;
@@ -35,7 +37,7 @@ public class ProductService {
     public List<Product> getInvestorProducts(Long investorId) {
         Investor investor = investorRepository
             .findById(investorId)
-            .orElseThrow(() -> new RuntimeException(String.format("%s with the %s of %s was not found","Investor", "id", investorId)));
+            .orElseThrow(() -> new ApplicationException(Errors.INVESTOR_NOT_FOUND, List.of(investorId)));
         
         return investor.getProducts();
     }
@@ -46,15 +48,14 @@ public class ProductService {
             .stream()
             .filter(prod -> prod.getId().equals(withdrawalDTO.getProductId()))
             .findFirst()
-            .orElseThrow(() -> new RuntimeException(new RuntimeException(String.format("%s with the %s of %s was not found","Product", "id", String.valueOf(1L)))));
-    
+            .orElseThrow(() -> new ApplicationException(Errors.PRODUCT_NOT_FOUND, List.of(withdrawalDTO.getProductId())));
         if ((product.getProductType().equals(ProductType.RETIREMENT) &&
             product.getInvestor().calculateAge() < 65)) {
-            throw new RuntimeException("Investor should be older than 65");
+            throw new ApplicationException(Errors.INVESTOR_NOT_ELIGIBLE);
         }
 
         if (withdrawalDTO.getAmount() > product.getBalance()) {
-            throw new RuntimeException("Amount can't be greater than balance");
+            throw new ApplicationException(Errors.INSUFFICIENT_FUNDS, List.of(product.getId()));
         }
         
         WithdrawalNotice createdNotice = withdrawalDTO.toWithdrawalNotice();
@@ -68,7 +69,7 @@ public class ProductService {
     public List<WithdrawalNotice> getWithdrawalNoticesByProductId(Long produtId) {
         Product product = productRepository
             .findById(produtId)
-            .orElseThrow(() -> new RuntimeException(String.format("%s with the %s of %d was not found","Product", "id", produtId)));
+            .orElseThrow(() -> new ApplicationException(Errors.PRODUCT_NOT_FOUND, List.of(produtId)));
 
         return product.getWithdrawalNotices();
     }

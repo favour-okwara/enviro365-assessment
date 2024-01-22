@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.favourokwara.investment.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -39,7 +40,7 @@ public class WithdrawalNotice extends Auditable {
 
     @NotNull(message = "WITHDRAWAL DATE is mandatory.")
     @Column(name = "withdrawal_date")
-    private LocalDateTime withdrawalDate;
+    private LocalDate withdrawalDate;
 
     @Embedded
     private BankingDetails bankingDetails;
@@ -53,7 +54,7 @@ public class WithdrawalNotice extends Auditable {
         Double amount,
         String bankName,
         String accountNumber,
-        LocalDateTime withdrawalDate
+        LocalDate withdrawalDate
     ) {
         this();
         this.amount = amount;
@@ -63,6 +64,8 @@ public class WithdrawalNotice extends Auditable {
     }
 
     public WithdrawalNotice() {
+        bankingDetails = new BankingDetails();
         this.status = WithdrawalStatus.PENDING;
+        setCreatedDate(LocalDateTime.now());
     }
 }

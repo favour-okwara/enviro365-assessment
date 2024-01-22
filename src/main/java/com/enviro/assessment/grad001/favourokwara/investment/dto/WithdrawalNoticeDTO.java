@@ -1,6 +1,6 @@
 package com.enviro.assessment.grad001.favourokwara.investment.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.enviro.assessment.grad001.favourokwara.investment.model.WithdrawalNotice;
 
@@ -26,9 +26,14 @@ public class WithdrawalNoticeDTO {
     private String accountNumber;
 
     @NotNull(message = "WITHDRAWAL DATE is mandatory.")
-    private LocalDateTime withdrawalDate;
+    private LocalDate withdrawalDate;
 
     public WithdrawalNotice toWithdrawalNotice() {
-        return new WithdrawalNotice(amount, bankName, accountNumber, withdrawalDate);
+        return new WithdrawalNotice(
+            amount,
+            bankName,
+            accountNumber,
+            withdrawalDate
+        );
     }
 }

@@ -16,13 +16,13 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper=false) // exclude fields from BaseEntiy 
 @Data
-@Builder
+@NoArgsConstructor
 @Entity
 @Table(name = "investors")
 public class Investor extends BaseEntity {

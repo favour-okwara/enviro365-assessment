@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.favourokwara.investment.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -85,5 +86,19 @@ public class ProductService {
             LocalDateTime createdDate = notice.getCreatedDate();
             return createdDate.isAfter(startDate) && createdDate.isBefore(endDate);
         } ).toList();
+    }
+
+    public List<WithdrawalNotice> getWithdrawalNoticesBetweenDates(Long productId, LocalDate start, LocalDate stop) {
+
+        List<WithdrawalNotice> withdrawalNotices = getWithdrawalNoticesByProductId(productId);
+
+        return withdrawalNotices
+            .stream()
+            .filter(notice -> {
+                LocalDateTime createDate = notice.getCreatedDate();
+
+                return createDate.isAfter(start.atStartOfDay()) && 
+                    createDate.isBefore(stop.plusDays(1).atStartOfDay());
+        }).toList();
     }
 }

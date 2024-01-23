@@ -52,7 +52,7 @@ public class InvestorController {
     @PostMapping("/{id}/withdrawal")
     public ResponseEntity<WithdrawalNotice> createWithdrawalNotice(
         @PathVariable Long id,
-        @RequestBody @Valid WithdrawalNoticeDTO withdrawalNoticeDTO
+        @Valid @RequestBody WithdrawalNoticeDTO withdrawalNoticeDTO
     ) {
         WithdrawalNotice withdrawalNotice = productService
             .createWithdrawalNotice(id, withdrawalNoticeDTO);

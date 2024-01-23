@@ -58,5 +58,4 @@ public class InvestorController {
             .createWithdrawalNotice(id, withdrawalNoticeDTO);
         return ResponseEntity.ok(withdrawalNotice);
     }
-    
 }

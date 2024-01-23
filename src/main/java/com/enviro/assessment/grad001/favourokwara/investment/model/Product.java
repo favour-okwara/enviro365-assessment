@@ -19,25 +19,29 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @EqualsAndHashCode(callSuper=false)
 @Data
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "products")
 public class Product extends BaseEntity {
 
+    @NonNull
     @NotBlank(message = "NAME can not be blank.")
     @NotNull(message = "NAME is mandtory.")
     @Column(name = "name")
     private String name;
 
+    @NonNull
     @NotNull(message = "PRODUCT TYPE is mandtory.")
     @Column(name = "product_type")
     @Enumerated(EnumType.STRING)
     private ProductType productType;
 
+    @NonNull
     @PositiveOrZero
     @NotNull(message = "BALANCE is mandtory.")
     @Column(name = "balance")
@@ -56,4 +60,7 @@ public class Product extends BaseEntity {
     )
     @JsonIgnore
     private List<WithdrawalNotice> withdrawalNotices;
+    
+    public Product() {
+    }
 }

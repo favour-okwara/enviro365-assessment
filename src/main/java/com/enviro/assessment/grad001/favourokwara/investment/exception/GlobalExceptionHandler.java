@@ -1,14 +1,11 @@
 package com.enviro.assessment.grad001.favourokwara.investment.exception;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -48,7 +45,6 @@ public class GlobalExceptionHandler extends DefaultErrorAttributes {
 
     protected ResponseEntity<Map<String, Object>> getErrorsMap(WebRequest request,
                                                          HttpStatus status, ApplicationException ex) {
-        Locale locale = LocaleContextHolder.getLocale();
         return getErrorsMap(request, status, ex.getLocalizedMessage(), List.of());
     }
 

@@ -2,13 +2,16 @@ package com.enviro.assessment.grad001.favourokwara.investment.dto;
 
 import java.time.LocalDate;
 
+import com.enviro.assessment.grad001.favourokwara.investment.model.BankingDetails;
 import com.enviro.assessment.grad001.favourokwara.investment.model.WithdrawalNotice;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class WithdrawalNoticeDTO {
 
     @NotNull(message = "PRODUCT ID is mandatory.")
@@ -29,11 +32,6 @@ public class WithdrawalNoticeDTO {
     private LocalDate withdrawalDate;
 
     public WithdrawalNotice toWithdrawalNotice() {
-        return new WithdrawalNotice(
-            amount,
-            bankName,
-            accountNumber,
-            withdrawalDate
-        );
+        return new WithdrawalNotice(amount, withdrawalDate, new BankingDetails(bankName, accountNumber));
     }
 }

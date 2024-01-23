@@ -1,7 +1,6 @@
 package com.enviro.assessment.grad001.favourokwara.investment.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,10 +17,15 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
+@RequiredArgsConstructor
+@ToString
 @Entity
 @Table(name = "withdrawal_notices")
 public class WithdrawalNotice extends Auditable {
@@ -31,18 +35,21 @@ public class WithdrawalNotice extends Auditable {
     private Long id;
 
     @NotNull(message = "WITHDRAWAL AMOUNT is mandatory.")
+    @NonNull
     @Column(name = "amount")
     private Double amount;
   
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private WithdrawalStatus status;
+    private WithdrawalStatus status = WithdrawalStatus.PENDING;
 
     @NotNull(message = "WITHDRAWAL DATE is mandatory.")
+    @NonNull
     @Column(name = "withdrawal_date")
     private LocalDate withdrawalDate;
 
     @Embedded
+    @NonNull
     private BankingDetails bankingDetails;
 
     @ManyToOne
@@ -50,22 +57,6 @@ public class WithdrawalNotice extends Auditable {
     @JsonIgnore
     private Product product;
 
-    public WithdrawalNotice(
-        Double amount,
-        String bankName,
-        String accountNumber,
-        LocalDate withdrawalDate
-    ) {
-        this();
-        this.amount = amount;
-        this.withdrawalDate = withdrawalDate;
-        bankingDetails.setBankName(bankName);
-        bankingDetails.setAccountNumber(accountNumber);
-    }
-
     public WithdrawalNotice() {
-        bankingDetails = new BankingDetails();
-        this.status = WithdrawalStatus.PENDING;
-        setCreatedDate(LocalDateTime.now());
     }
 }

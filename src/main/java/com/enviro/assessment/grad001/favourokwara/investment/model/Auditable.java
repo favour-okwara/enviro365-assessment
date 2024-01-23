@@ -29,7 +29,7 @@ public abstract class Auditable {
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
-    protected LocalDateTime createdDate;
+    protected LocalDateTime createdDate = LocalDateTime.now();
 
     @JsonInclude(Include.NON_NULL)
     @LastModifiedBy

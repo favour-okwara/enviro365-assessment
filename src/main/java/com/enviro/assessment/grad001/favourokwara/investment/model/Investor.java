@@ -18,37 +18,43 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @EqualsAndHashCode(callSuper=false) // exclude fields from BaseEntiy 
 @Data
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "investors")
 public class Investor extends BaseEntity {
 
+    @NonNull
     @NotNull(message = "FIRST NAME is mandatory.")
     @NotBlank(message = "FIRST NAME can not be blank.")
     @Column(name = "first_name")
     private String firstName;
 
+    @NonNull
     @NotNull(message = "")
     @NotBlank(message = "LAST NAME can not be blank.")
     @Column(name = "last_name")
     private String lastName;
 
+    @NonNull
     @Email
     @NotNull(message = "EMAIL is mandatory.")
     @NotBlank(message = "EMAIL can not be blank.")
     @Column(name = "email")
     private String email;
 
+    @NonNull
     @NotNull(message = "PHONE NUMBER is mandatory.")
     @NotBlank(message = "PHONE NUMBER can not be blank.")
     @Column(name = "phone_number")
     private String phoneNumber;
 
     @Past
+    @NonNull
     @NotNull(message = "DATE OF BIRTH is mandatory.")
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
@@ -61,6 +67,9 @@ public class Investor extends BaseEntity {
     )
     @JsonIgnore
     private List<Product> products;
+
+    public Investor() {
+    }
 
     public int calculateAge() {
         return Period

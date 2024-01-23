@@ -4,12 +4,12 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 
-@Setter
-@Getter
+@Data
+@AllArgsConstructor
 @Embeddable // can be embeded into an entiity
 public class BankingDetails {
 
@@ -23,4 +23,6 @@ public class BankingDetails {
     @Column(name = "account_number")
     private String accountNumber;
 
+    public BankingDetails() {
+    }
 }

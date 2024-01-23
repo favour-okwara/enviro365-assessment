@@ -17,6 +17,8 @@ import com.enviro.assessment.grad001.favourokwara.investment.repository.Investor
 import com.enviro.assessment.grad001.favourokwara.investment.repository.ProductRepository;
 import com.enviro.assessment.grad001.favourokwara.investment.repository.WithdrawalNoticeRepository;
 
+import lombok.NonNull;
+
 @Service
 public class ProductService {
 
@@ -35,7 +37,7 @@ public class ProductService {
         
     }
 
-    public List<Product> getInvestorProducts(Long investorId) {
+    public List<Product> getInvestorProducts(@NonNull Long investorId) {
         Investor investor = investorRepository
             .findById(investorId)
             .orElseThrow(() -> new ApplicationException(Errors.INVESTOR_NOT_FOUND, List.of(investorId)));
@@ -68,7 +70,7 @@ public class ProductService {
         return createdNotice;
     }
 
-    public List<WithdrawalNotice> getWithdrawalNoticesByProductId(Long produtId) {
+    public List<WithdrawalNotice> getWithdrawalNoticesByProductId(@NonNull Long produtId) {
         Product product = productRepository
             .findById(produtId)
             .orElseThrow(() -> new ApplicationException(Errors.PRODUCT_NOT_FOUND, List.of(produtId)));

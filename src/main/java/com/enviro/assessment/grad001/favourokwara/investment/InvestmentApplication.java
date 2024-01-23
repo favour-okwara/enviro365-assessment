@@ -27,25 +27,13 @@ public class InvestmentApplication {
 		ProductRepository productRepository
 	) {
 		return args -> {
-			Investor investor = new Investor();
-			investor.setFirstName("James");
-			investor.setLastName("Bond");
-			investor.setEmail("jamesBond007@mi6.com");
-			investor.setPhoneNumber("+43 44 343 3434");
-			investor.setDateOfBirth(LocalDate.of(1983, 1, 23));
-			
+			Investor investor = new Investor("James", "Bond", "jamesbnd007@email.com", "+12-34-567-8901", LocalDate.of(1960, 10, 17));
 			investorRepository.save(investor);
 
-			Product product = new Product();
-			product.setName("james bond 401K");
-			product.setProductType(ProductType.RETIREMENT);
-			product.setBalance(700000.0);
+			Product product = new Product("James' Retirement Fund", ProductType.RETIREMENT, 30000.0);
 			product.setInvestor(investor);
 
-			Product product1 = new Product();
-			product1.setName("bond savings");
-			product1.setProductType(ProductType.SAVINGS);
-			product1.setBalance(50000.0);
+			Product product1 = new Product("James' Savings", ProductType.SAVINGS, 4000.0);
 			product1.setInvestor(investor);
 
 			productRepository.saveAll(List.of(product, product1));

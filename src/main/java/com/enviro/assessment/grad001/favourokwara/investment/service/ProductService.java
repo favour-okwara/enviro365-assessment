@@ -50,6 +50,7 @@ public class ProductService {
             .filter(prod -> prod.getId().equals(withdrawalDTO.getProductId()))
             .findFirst()
             .orElseThrow(() -> new ApplicationException(Errors.PRODUCT_NOT_FOUND, List.of(withdrawalDTO.getProductId())));
+
         if ((product.getProductType().equals(ProductType.RETIREMENT) &&
             product.getInvestor().calculateAge() < 65)) {
             throw new ApplicationException(Errors.INVESTOR_NOT_ELIGIBLE);

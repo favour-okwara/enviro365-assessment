@@ -21,7 +21,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-@EqualsAndHashCode(callSuper=false) // exclude fields from BaseEntiy 
+@EqualsAndHashCode(callSuper=false) // excludes parent fields from equals and hash generation
 @Data
 @RequiredArgsConstructor
 @Entity
@@ -72,8 +72,6 @@ public class Investor extends BaseEntity {
     }
 
     public int calculateAge() {
-        return Period
-            .between(dateOfBirth, LocalDate.now())
-            .getYears();
+        return Period.between(dateOfBirth, LocalDate.now()).getYears();
     }
 }

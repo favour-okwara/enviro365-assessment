@@ -14,9 +14,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class WithdrawalNoticeDTO {
 
-    @NotNull(message = "PRODUCT ID is mandatory.")
-    private Long productId;
-
     @NotNull(message = "WITHDRAWAL AMOUNT is mandatory.")
     private Double amount;
 

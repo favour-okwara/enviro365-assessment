@@ -6,7 +6,8 @@ public enum Errors implements ErrorResponse {
     INVESTOR_NOT_FOUND( "INVESTOR_NOT_FOUND", HttpStatus.NOT_FOUND, "Investor with id='%d' not found."),
     PRODUCT_NOT_FOUND( "PRODUCT_NOT_FOUND", HttpStatus.NOT_FOUND, "Product with id='%d' not found."),
     INSUFFICIENT_FUNDS("INSUFFICIENT_FUNDS", HttpStatus.BAD_REQUEST, "Product with id='%d' has insufficient funds."),
-    INVESTOR_NOT_ELIGIBLE("INVESTOR_NOT_ELIGIBLE", HttpStatus.FORBIDDEN, "Investor below 65 years of age.");
+    INVESTOR_NOT_ELIGIBLE("INVESTOR_NOT_ELIGIBLE", HttpStatus.FORBIDDEN, "Investor below 65 years of age."),
+    INVALID_DATE_RANGE("INVALID_DATE_RANGE", HttpStatus.BAD_REQUEST, "Start date can't be after end.");
     
     String key;
     HttpStatus httpStatus;

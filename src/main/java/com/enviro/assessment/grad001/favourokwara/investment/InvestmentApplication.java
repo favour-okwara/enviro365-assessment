@@ -21,22 +21,30 @@ public class InvestmentApplication {
 		SpringApplication.run(InvestmentApplication.class, args);
 	}
 
-// 	@Bean
-// 	CommandLineRunner commandLineRunner(
-// 		InvestorRepository investorRepository,
-// 		ProductRepository productRepository
-// 	) {
-// 		return args -> {
-// 			Investor investor = new Investor("James", "Bond", "jamesbnd007@email.com", "+12-34-567-8901", LocalDate.of(1960, 10, 17));
-// 			investorRepository.save(investor);
+	// Uncomment bean to populate database (for testing purposes)
+	// @Bean CommandLineRunner commandLineRunner(
+	// 	InvestorRepository investorRepository,
+	// 	ProductRepository productRepository
+	// ) {
+	// 	return args -> {
+	// 		Investor investor1 = new Investor("James", "Bond", "jamesbond007@email.com", "+44 12 345 6789", LocalDate.of(1968, 3, 2));
+	// 		Investor investor2 = new Investor("Bilbo", "Baggins", "bilbobaggins@email.com", "+44 98 765 4321", LocalDate.of(1956, 3, 2));
 
-// 			Product product = new Product("James' Retirement Fund", ProductType.RETIREMENT, 30000.0);
-// 			product.setInvestor(investor);
+	// 		investorRepository.saveAll(List.of(investor1, investor2));
 
-// 			Product product1 = new Product("James' Savings", ProductType.SAVINGS, 4000.0);
-// 			product1.setInvestor(investor);
+	// 		Product product1 = new Product("James' Savings", ProductType.SAVINGS, 20000.0);
+	// 		product1.setInvestor(investor1);
 
-// 			productRepository.saveAll(List.of(product, product1));
-// 		};
-// 	}
+	// 		Product product2 = new Product("James' RETIREMENT", ProductType.RETIREMENT, 23500.0);
+	// 		product2.setInvestor(investor1);
+
+	// 		Product product3 = new Product("Bilbo' Savings", ProductType.SAVINGS, 2200.0);
+	// 		product3.setInvestor(investor2);
+
+	// 		Product product4 = new Product("Bilbo' RETIREMENT", ProductType.RETIREMENT, 500.0);
+	// 		product4.setInvestor(investor2);
+
+	// 		productRepository.saveAll(List.of(product1, product2, product3, product4));
+	// 	};
+	// }
 }

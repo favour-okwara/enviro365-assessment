@@ -21,22 +21,22 @@ public class InvestmentApplication {
 		SpringApplication.run(InvestmentApplication.class, args);
 	}
 
-	@Bean
-	CommandLineRunner commandLineRunner(
-		InvestorRepository investorRepository,
-		ProductRepository productRepository
-	) {
-		return args -> {
-			Investor investor = new Investor("James", "Bond", "jamesbnd007@email.com", "+12-34-567-8901", LocalDate.of(1960, 10, 17));
-			investorRepository.save(investor);
+// 	@Bean
+// 	CommandLineRunner commandLineRunner(
+// 		InvestorRepository investorRepository,
+// 		ProductRepository productRepository
+// 	) {
+// 		return args -> {
+// 			Investor investor = new Investor("James", "Bond", "jamesbnd007@email.com", "+12-34-567-8901", LocalDate.of(1960, 10, 17));
+// 			investorRepository.save(investor);
 
-			Product product = new Product("James' Retirement Fund", ProductType.RETIREMENT, 30000.0);
-			product.setInvestor(investor);
+// 			Product product = new Product("James' Retirement Fund", ProductType.RETIREMENT, 30000.0);
+// 			product.setInvestor(investor);
 
-			Product product1 = new Product("James' Savings", ProductType.SAVINGS, 4000.0);
-			product1.setInvestor(investor);
+// 			Product product1 = new Product("James' Savings", ProductType.SAVINGS, 4000.0);
+// 			product1.setInvestor(investor);
 
-			productRepository.saveAll(List.of(product, product1));
-		};
-	}
+// 			productRepository.saveAll(List.of(product, product1));
+// 		};
+// 	}
 }
